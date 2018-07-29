@@ -6,7 +6,7 @@
         android:id="@+id/item_Random"
         android:orderInCategory="1"
         android:title="Random Joke"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         >
     </item>
 

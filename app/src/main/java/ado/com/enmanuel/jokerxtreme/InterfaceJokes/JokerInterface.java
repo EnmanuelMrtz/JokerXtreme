@@ -6,6 +6,6 @@ import retrofit2.http.GET;
 
 public interface JokerInterface {
 
-    @GET("jokes")
+    @GET("jokes/")
     Call<JokeSONResponse> getValue();
 }

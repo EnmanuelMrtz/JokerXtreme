@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.item_Random) {
             Context context = MainActivity.this;
 
-
+            setContentView(R.layout.activity_random_joke);
 
             Toast.makeText(context, "En construcción...", Toast.LENGTH_SHORT).show();
             return true;
