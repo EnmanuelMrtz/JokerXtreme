@@ -1,10 +1,14 @@
 package ado.com.enmanuel.jokerxtreme;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Value> dataJokes;
     private JokerAdapter adapter;
-    private JokerInterface service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         startShow();
     }
 
+
     private void startShow() {
         recyclerView = (RecyclerView) findViewById(R.id.rv_jokes);
         recyclerView.setHasFixedSize(true);
@@ -42,12 +46,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         loadJokeSON();
-        //Comentarios
     }
 
     private void loadJokeSON() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.icndb.com/jokes/")
+                .baseUrl("http://api.icndb.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -67,5 +70,25 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Error", t.getMessage());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_Random) {
+            Context context = MainActivity.this;
+
+
+
+            Toast.makeText(context, "En construcción...", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

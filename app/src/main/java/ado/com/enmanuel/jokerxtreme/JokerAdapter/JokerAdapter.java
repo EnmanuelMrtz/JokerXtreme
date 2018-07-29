@@ -1,6 +1,5 @@
 package ado.com.enmanuel.jokerxtreme.JokerAdapter;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,16 +19,15 @@ public class JokerAdapter extends RecyclerView.Adapter<JokerAdapter.JokerViewHol
         this.value = value;
     }
 
-    @NonNull
     @Override
-    public JokerAdapter.JokerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public JokerAdapter.JokerViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.card_joke_presentation, viewGroup, false);
         return new JokerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull JokerAdapter.JokerViewHolder jokerViewHolder, int i) {
+    public void onBindViewHolder(JokerAdapter.JokerViewHolder jokerViewHolder, int i) {
         jokerViewHolder.tv_joke.setText(value.get(i).getJoke());
     }
 
@@ -41,7 +39,7 @@ public class JokerAdapter extends RecyclerView.Adapter<JokerAdapter.JokerViewHol
     public class JokerViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_joke;
 
-        public JokerViewHolder(@NonNull View itemView) {
+        public JokerViewHolder(View itemView) {
             super(itemView);
 
             tv_joke = (TextView) itemView.findViewById(R.id.tv_joke);
