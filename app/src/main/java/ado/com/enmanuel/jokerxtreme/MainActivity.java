@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +16,7 @@ import ado.com.enmanuel.jokerxtreme.APIResponse.JokeSONResponse;
 import ado.com.enmanuel.jokerxtreme.InterfaceJokes.JokerInterface;
 import ado.com.enmanuel.jokerxtreme.InterfaceJokes.RandomJokerInterface;
 import ado.com.enmanuel.jokerxtreme.JokerAdapter.JokerAdapter;
+import ado.com.enmanuel.jokerxtreme.JokerAdapter.RandomJokerAdapter;
 import ado.com.enmanuel.jokerxtreme.Model.Value;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Value> dataJokes;
     private JokerAdapter adapter;
+    private RandomJokerAdapter randomJokerAdapter;
     private Retrofit retrofit;
 
     @Override
@@ -84,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<JokeSONResponse> call, Response<JokeSONResponse> response) {
                 JokeSONResponse jokeSONResponse = response.body();
-                dataJokes = new ArrayList<>(Arrays.asList(jokeSONResponse.getRandom()));
-                adapter = new JokerAdapter(dataJokes);
-                recyclerView.setAdapter(adapter);
+                dataJokes = new ArrayList<>(Arrays.asList(jokeSONResponse.getValue()));
+                randomJokerAdapter = new RandomJokerAdapter(dataJokes);
+                recyclerView.setAdapter(randomJokerAdapter);
             }
 
             @Override
@@ -111,9 +112,8 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_random_joke);
 
 //            loadJokeSON();
+//            requestRandom();
 
-
-            Toast.makeText(context, "En construcción...", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

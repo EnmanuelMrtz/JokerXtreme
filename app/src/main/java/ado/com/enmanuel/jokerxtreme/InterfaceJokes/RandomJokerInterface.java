@@ -6,6 +6,6 @@ import retrofit2.http.GET;
 
 public interface RandomJokerInterface {
 
-    @GET("jokes/random/10")
+    @GET("jokes/random/1")
     Call<JokeSONResponse> getRandom();
 }
