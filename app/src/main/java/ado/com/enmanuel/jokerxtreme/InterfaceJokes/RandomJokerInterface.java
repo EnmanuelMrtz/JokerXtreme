@@ -4,8 +4,8 @@ import ado.com.enmanuel.jokerxtreme.APIResponse.JokeSONResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface JokerInterface {
+public interface RandomJokerInterface {
 
-    @GET("jokes/random/1")
-    Call<JokeSONResponse> getValue();
+    @GET("jokes/random/10")
+    Call<JokeSONResponse> getRandom();
 }

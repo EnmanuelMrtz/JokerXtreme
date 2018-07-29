@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 import ado.com.enmanuel.jokerxtreme.APIResponse.JokeSONResponse;
 import ado.com.enmanuel.jokerxtreme.InterfaceJokes.JokerInterface;
+import ado.com.enmanuel.jokerxtreme.InterfaceJokes.RandomJokerInterface;
 import ado.com.enmanuel.jokerxtreme.JokerAdapter.JokerAdapter;
 import ado.com.enmanuel.jokerxtreme.Model.Value;
 import retrofit2.Call;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Value> dataJokes;
     private JokerAdapter adapter;
+    private Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +48,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         loadJokeSON();
+        requestRecycler();
     }
 
     private void loadJokeSON() {
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.icndb.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        }
 
+    private void requestRecycler() {
         JokerInterface request = retrofit.create(JokerInterface.class);
         Call<JokeSONResponse> call = request.getValue();
         call.enqueue(new Callback<JokeSONResponse>() {
@@ -67,7 +72,26 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JokeSONResponse> call, Throwable t) {
-                Log.e("Error", t.getMessage());
+                Log.e("Error: ", t.getMessage());
+            }
+        });
+    }
+
+    private void requestRandom() {
+        RandomJokerInterface request = retrofit.create(RandomJokerInterface.class);
+        Call<JokeSONResponse> call = request.getRandom();
+        call.enqueue(new Callback<JokeSONResponse>() {
+            @Override
+            public void onResponse(Call<JokeSONResponse> call, Response<JokeSONResponse> response) {
+                JokeSONResponse jokeSONResponse = response.body();
+                dataJokes = new ArrayList<>(Arrays.asList(jokeSONResponse.getRandom()));
+                adapter = new JokerAdapter(dataJokes);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<JokeSONResponse> call, Throwable t) {
+                Log.e("Error: ", t.getMessage());
             }
         });
     }
@@ -85,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
             Context context = MainActivity.this;
 
             setContentView(R.layout.activity_random_joke);
+
+//            loadJokeSON();
+
 
             Toast.makeText(context, "En construcción...", Toast.LENGTH_SHORT).show();
             return true;
