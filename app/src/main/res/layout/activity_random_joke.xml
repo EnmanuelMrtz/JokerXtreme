@@ -12,7 +12,7 @@
         android:layout_width="335dp"
         android:layout_height="191dp"
         android:layout_marginStart="24dp"
-        android:text="TextView"
+        android:text="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="32dp"
         android:layout_marginTop="15dp"/>
@@ -21,7 +21,7 @@
         android:id="@+id/btn_generate_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Generate Random Joke"
+        android:text="@string/GenerateRandomJoke"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="263dp"
